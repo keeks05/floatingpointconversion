@@ -1,0 +1,50 @@
+Program that pareses a bit string to get floating point value
+- Program takes CLIA that will be a file
+	Need some type of way to read the file and get the info out of it
+		use operator >> to get word into a variable
+		there are a possible of 3! combinations that can occur with the file
+	Get the number of bits for man and exp
+		A bunch of if statments
+	**File will specify order of the sign, matisssa, and exponent
+	**FIle will also have the number of bits for each except sign
+- Program should prompt user for bit string
+	If user enters bit string wrong keep on prompting(some type of while loop)
+		Error message indicating error -> to std::out
+- Once acceptable bit string -> convert to flaoting-point value and return value
+	Get Mantissa
+		Pass through a sub-string or only the matissa portion
+		Use bit-wise to check to see if there's a one
+		If there is a one:
+			result+= 2^(frac) where frac = -1 and decrement every iteration
+		Decrement the exponent with every iteration until the end of the string
+		Add one to total result and return
+	Get Exponent
+		Get Bias
+			Get n from either the txt file or the sub-string exponent length
+			Bias = 2^(n-1) - 1 -> decimal number
+		Convert exponent binary section to decimal
+		Subtract binary decimal by bias decimal number -> yields exponent
+	Get Sign
+		Sign will have to be extracted by looking one over the one before it
+			If sign bit < 0:
+				Multiply result by -1
+			Some type of extra check to see if there is a one in the sign place
+	Combine everything
+		Multiply the mantissa by 2^(exponent) * sign -- (Should be either +/- or -1/1)
+--------------------------------------------------------
+Notes:
+	Exponent is stored with a bias
+		Bias is 2^n - 1 (n is the number of bits used for the exponent)
+		"the bias should be subtracted when you are converting from the bit pattern
+		to the actual base 10 exponent"
+	Always implicit leading 1 with the mantissa
+	Floating point-rep will NOT take more than 32 bits
+		Exponent will not have more than 8 bits
+
+Mantissa is the fractional component
+Exponent is the exponent
+sign will be given in the number usually at end of it 
+Ex 4.256 * 10^7
+	Mantissa = .256
+	Exponent = 7
+
